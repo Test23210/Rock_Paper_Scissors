@@ -1,0 +1,219 @@
+using System;
+using System.IO;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
+
+
+
+
+
+namespace RockPapersandScissors
+{
+
+    class Game
+    {
+        private static string? playerinput2;
+        private static string? playerinput1;
+        private static string? Continue;
+        private static int? playerscore = 0;
+        private static int? playerscore2 = 0;
+        private static string? input;
+        public static string? playername1;
+        public static string? playername2;
+
+        // cant seem to able to show the player name that was written//
+        static void Main(string[] args)   
+        {
+
+                GameTitle();
+                playername1 = InputName(1);
+                playername2 = InputName(2);
+            Console.WriteLine("Welcome " + playername1 + " and " + playername2);
+            string r1 = "-Game round 1-";
+            Console.WriteLine(r1);
+
+            playerinput1 = InputMove();
+            playerinput2 = InputMove2();
+            GameResult();
+            input = PLayagin();
+
+            
+            int Roundplayed = 1;
+            // it does the while loop but it can't seem to refreash the whole screen//
+            while (input == "y" && Roundplayed < 5)
+            { 
+                    Console.Clear();
+                    GameTitle();
+                    Roundplayed += 1;
+                    Console.WriteLine("-Game round " + Roundplayed + "-");
+                    playerinput1 = InputMove();
+                    playerinput2 = InputMove2();
+                    GameResult();
+                    PLayagin();
+
+            }
+            Console.Clear();
+            display();
+            Console.ReadLine();
+
+        }
+
+        // this is were you type your name it and then returens the name that you type//
+        public static string? InputName(int number = 1)
+        {
+            String name = Console.ReadLine();
+            Console.WriteLine("Lets Begin!");
+            Console.WriteLine("Player " + number + ": type name below and press ENTER to continue");
+            return name = Console.ReadLine();
+        }
+
+        // the game title//
+        public static void GameTitle()
+        {
+            Console.WriteLine("Welcome to rock,paper and scissors");
+            Console.WriteLine("there will be 5 round of rock, paper and scissors!");
+
+        }
+        // if player pick r it will show as rock, p for paper and s scissors and it returns there input to show what they put and shoes on screen//
+        public static string? InputMove()
+        {
+            //rank 
+            string[] moves = { "Rock", "Paper", "Scissors" };
+            for (int i = 0; i < moves.Length; i++)
+            {
+                int rank = i + 1;
+                Console.WriteLine(rank + ". " + moves[i]);
+                
+            }
+            string move;
+            Console.WriteLine("");
+            Console.WriteLine("Welcome " + playername1 + " Its your turn");
+            Console.WriteLine("Enter '1' for Rock '2' for Paper or '3' for scissors and press enter to continue");
+            return move = Console.ReadLine();
+
+
+        }
+        // it instruction on moves the player can do and return there input and then pass it to the game results//
+        public static string InputMove2()
+        {
+            string[] moves = { "Rock", "Paper", "Scissors" };
+            for (int i = 0; i < moves.Length; i++)
+            {
+                int rank = i + 1;
+                Console.WriteLine(rank + ". " + moves[i]);
+
+            }
+            string move;
+            Console.WriteLine("");
+            Console.WriteLine("Welcome " + playername2 + " Its your turn");
+            Console.WriteLine("Enter '1' for Rock '2' for Paper and '3' for Scissors and press enter to continue");
+            return move = Console.ReadLine();
+        }
+
+
+
+
+        // Compares both player1 input and player2 input and then show the result of the game after player1 and player2 put in there answer//
+        public static void GameResult()
+        {
+           
+            if (playerinput1 == "1" && playerinput2 == "3")
+            {
+                Console.WriteLine($"{playername1} wins! {playername1} rock beats {playername2}'s scissors!");
+                playerscore += 1;
+
+            }
+
+            else if (playerinput1 == "1" && playerinput2 == "2")
+            {
+                Console.WriteLine($"{playername2} wins! {playername2}'s paper beats {playername1}'s rock!");
+                playerscore2 =+ 1;
+
+
+            }
+            else if (playerinput1 == "3" && playerinput2 == "2")
+            {
+                Console.WriteLine($"{playername1} wins! {playername1}'s Scisssors beats {playername2}'s Paper!");
+                playerscore =+ 1;
+
+
+            }
+
+            else if (playerinput1 == "3" && playerinput2 == "1")
+
+            {
+                Console.WriteLine($"{playername2} wins! {playername2}'s Rock beats {playername1}'s Scissors!");
+                playerscore2 =+ 1;
+
+            }
+
+            else if (playerinput1 == "2" && playerinput2 == "1")
+            {
+                Console.WriteLine($"{playername1} wins! {playername1}'s paper beats {playername2}'s rock!");
+                playerscore =+ 1;
+
+            }
+            else if  (playerinput1 == "2" && playerinput2 == "3")
+            {
+                Console.WriteLine($"{playername2} wins! {playername2}'s scissors beats {playername1}'s paper!");
+                playerscore2 =+ 1;
+
+            }
+            else if (playerinput1 == playerinput2)
+            {
+                Console.WriteLine("It's a tie!");
+                
+            }
+            else
+            {
+
+                Console.WriteLine("put in a vaild input");
+                
+            }
+        }
+
+        //show's and act on the input of the player ethier if they choose Y or and invald in put//
+        public static string? PLayagin()
+        { 
+            Console.WriteLine("thank you for playing, if you would like to continuce type 'y' then enter");
+            Boolean playagian;
+            return input = Console.ReadLine();
+            if (input == "y")
+            {
+
+                playagian = true;
+
+            }
+
+            else if (input == "N")
+            {
+                playagian = false;
+
+            }
+            else
+            {
+                Console.WriteLine(" Invaild input try again");
+            }
+        }
+       
+        private static void display()
+        {
+            if (playerscore > playerscore2)
+            {
+                Console.WriteLine(playername1 + " has won ROCK, PAPER SCISSORS GAME!- ");
+            }
+            else if (playerscore < playerscore2)
+            {
+                Console.WriteLine(playername2 + "  -has won ROCK, PAPER  SCISSORS GAME!- ");
+            }
+            else
+            {
+                Console.WriteLine("-No One Wins-");
+            }
+            
+            
+        }
+
+    }
+
+}
